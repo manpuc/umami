@@ -5,6 +5,7 @@ import { LinkButton } from '@/components/common/LinkButton';
 import { LoadingPanel } from '@/components/common/LoadingPanel';
 import { useMessages, useNavigation, useWebsiteMetricsQuery } from '@/components/hooks';
 import { Maximize } from '@/components/icons';
+import { DownloadButton } from '@/components/input/DownloadButton';
 import { MetricLabel } from '@/components/metrics/MetricLabel';
 import { percentFilter } from '@/lib/filters';
 import { ListTable, type ListTableProps } from './ListTable';
@@ -81,10 +82,11 @@ export function MetricsTable({
       <Grid padding="2">
         {data && <ListTable {...props} data={filteredData} renderLabel={renderLabel} />}
         {showMore && limit && (
-          <Row justifyContent="center" alignItems="flex-end" paddingTop="4">
+          <Row justifyContent="center" alignItems="center" paddingTop="4" gap="2">
             <LinkButton href={updateParams({ view: type })} variant="quiet">
               <IconLabel icon={<Maximize />}>{t(labels.more)}</IconLabel>
             </LinkButton>
+            {data && <DownloadButton filename={type} data={filteredData} />}
           </Row>
         )}
       </Grid>

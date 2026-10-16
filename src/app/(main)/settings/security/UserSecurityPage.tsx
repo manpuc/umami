@@ -9,6 +9,7 @@ import { Panel } from '@/components/common/Panel';
 import { useMessages, useTwoFactorStatusQuery } from '@/components/hooks';
 import { TwoFactorDisableModal } from '@/components/modals/TwoFactorDisableModal';
 import { TwoFactorSetupModal } from '@/components/modals/TwoFactorSetupModal';
+import { TwoFactorBackupCodesSection } from './TwoFactorBackupCodesSection';
 
 export function UserSecurityPage() {
   const { t, labels, messages } = useMessages();
@@ -75,7 +76,7 @@ export function UserSecurityPage() {
                   />
                   <Text>{t(labels.twoFactorEnable)}</Text>
                 </Row>
-                  <Tooltip>{t(messages.twoFactorRequiredMessage)}</Tooltip>
+                <Tooltip>{t(messages.twoFactorRequiredMessage)}</Tooltip>
               </TooltipTrigger>
             ) : null}
 
@@ -106,6 +107,8 @@ export function UserSecurityPage() {
                 {t(messages.twoFactorRequiredMessage)}
               </Text>
             )}
+
+            {isConfigured === true && isEnabled && <TwoFactorBackupCodesSection />}
           </Column>
         </Panel>
       </Column>
